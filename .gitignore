@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+data/*.csv
+data/*.json
+!data/.gitkeep
+stimuli/objects/**/*.png
+stimuli/objects/**/*.jpg
+stimuli/objects/**/*.jpeg
