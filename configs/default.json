@@ -1,0 +1,34 @@
+{
+  "participant": "demo",
+  "session": "001",
+  "monitor_hz": 60,
+  "full_screen": false,
+  "window_size": [1280, 720],
+  "background": [-0.92, -0.92, -0.92],
+  "foreground": [0.95, 0.95, 0.95],
+  "fixation_s": 0.5,
+  "iti_s": 0.5,
+  "practice_trials": 4,
+  "figure_ground": {
+    "trials": 80,
+    "target_frames": 1,
+    "mask_frames": 30,
+    "grid_n": 15,
+    "figure_fraction": 0.32
+  },
+  "kanizsa": {
+    "trials_per_soa_per_condition": 12,
+    "target_frames": 1,
+    "soa_ms": [17, 67, 117, 167],
+    "mask_frames": 6
+  },
+  "occluded_object": {
+    "trials_per_cell": 10,
+    "target_frames": 3,
+    "soa_frames": 3,
+    "mask_frames": 6,
+    "occlusion_levels": [0.0, 0.4, 0.6],
+    "mask_conditions": [false, true],
+    "use_external_images": false
+  }
+}
