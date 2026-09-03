@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Iterable
 
-from psychopy import core, event, visual
+from psychopy import core, event, monitors, visual
 
 
 @dataclass
@@ -35,14 +35,27 @@ def load_config(path: str | Path) -> ExperimentConfig:
 
 def make_window(cfg: ExperimentConfig) -> visual.Window:
     raw = cfg.raw
-    win = visual.Window(
+    kwargs = dict(
         size=raw.get("window_size", [1280, 720]),
         fullscr=bool(raw.get("full_screen", False)),
         color=raw.get("background", [-0.92, -0.92, -0.92]),
-        units="height",
+        units=raw.get("window_units", "height"),
         allowGUI=not bool(raw.get("full_screen", False)),
         waitBlanking=True,
     )
+
+    monitor_cfg = raw.get("monitor")
+    if monitor_cfg:
+        mon = monitors.Monitor(str(monitor_cfg.get("name", "fffb-monitor")))
+        if monitor_cfg.get("width_cm") is not None:
+            mon.setWidth(float(monitor_cfg["width_cm"]))
+        if monitor_cfg.get("distance_cm") is not None:
+            mon.setDistance(float(monitor_cfg["distance_cm"]))
+        if monitor_cfg.get("resolution_px") is not None:
+            mon.setSizePix(tuple(int(v) for v in monitor_cfg["resolution_px"]))
+        kwargs["monitor"] = mon
+
+    win = visual.Window(**kwargs)
     win.recordFrameIntervals = True
     return win
 
